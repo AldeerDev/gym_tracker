@@ -54,3 +54,20 @@ def test_asignar_nombre_invalido_lanza_error(valor):
     g = GrupoMuscular("bicep")
     with pytest.raises(ValueError):
         g.nombre = valor
+
+
+@pytest.mark.parametrize(
+    "valor",
+    [
+        pytest.param(None, id="none"),
+        pytest.param(123, id="entero"),
+        pytest.param(5.5, id="float"),
+        pytest.param([], id="lista_vacia"),
+        pytest.param(["bicep"], id="lista_con_string")
+    ]
+)
+def test_asignar_nombre_invalido_no_modifica_el_anterior(valor):
+    g = GrupoMuscular("bicep")
+    with pytest.raises(ValueError):
+        g.nombre = valor
+    assert g.nombre == "bicep"
