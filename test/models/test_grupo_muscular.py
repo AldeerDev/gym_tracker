@@ -14,8 +14,12 @@ def test_asignar_nombre_valido():
     assert g.nombre == "Tricep"
 
 @pytest.mark.parametrize(
-    "valor", ["", "  ", "\t\n"],
-    ids=["vacia", "solo_espacios", "solo_tabs_y_saltos"]
+    "valor",
+    [
+        pytest.param("", id="cadena_vacia"),
+        pytest.param(" ", id="solo_espacios"),
+        pytest.param("\n\t", id="solo_tabulacion_y_sato")
+    ]
 )
 def test_crear_con_cadena_vacia_lanza_error(valor):
     with pytest.raises(ValueError):
