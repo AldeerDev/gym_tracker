@@ -13,6 +13,7 @@ def test_asignar_nombre_valido():
     g.nombre = "Tricep"
     assert g.nombre == "Tricep"
 
+
 @pytest.mark.parametrize(
     "valor",
     [
@@ -24,3 +25,18 @@ def test_asignar_nombre_valido():
 def test_crear_con_cadena_vacia_lanza_error(valor):
     with pytest.raises(ValueError):
         g = GrupoMuscular(valor)
+
+
+@pytest.mark.parametrize(
+    "valor",
+    [
+        pytest.param(None, id="none"),
+        pytest.param(123, id="entero"),
+        pytest.param(5.5, id="float"),
+        pytest.param([], id="lista_vacia"),
+        pytest.param(["bicep"], id="lista_con_string")
+    ]
+)
+def test_crear_con_tipo_invalido_lanza_error(valor):
+    with pytest.raises(ValueError):
+        GrupoMuscular(valor)
